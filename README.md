@@ -6,6 +6,7 @@
 - [Introduction](#introduction)
 - [Resources](#resources)
 - [Assumptions & Notes](#assumptions)
+- [The Backend Port](#port)
 - [Running the Application](#running)
 - [Logging in as normal](#normal)
 - [Logging in as management](#management)
@@ -47,6 +48,15 @@ Of course, an alternative would be to register as a new user and log in via that
 - In the case of multiple divisions, it is assumed that the Employee has the **same role** across all the divisions.
 - You will notice that sensitive information is stored inside **`backend/.env`** as environment variables. This is done for the sake of added security.
 - I have decided not to implement Git Version Control for this task.
+
+<a id="port"></a>
+
+## The Backend Port
+
+The Backend Port can be configured at the following places if needed:
+
+- `/backend/.env/` -> **BACKEND_PORT**
+- `/frontend/package.json` -> **"proxy"**
 
 <a id="running"></a>
 
