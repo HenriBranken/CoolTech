@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Martian+Mono:wght@600&display=swap");
+
+/* For adding a Credential to the Repo base. */
+.plus-image {
+  width: 3em;
+}
+.plus-button {
+  margin: 1em 0 1em 1em;
+  background-color: transparent;
+  border: 0px white solid;
+}
+
+/* The wrapper for the <table> element. */
+.table-container {
+  margin-top: 20px;
+}
+
+/* Styling for the table itself. */
+.table-container > table {
+  margin: 0 auto;
+  width: 90%;
+  min-width: 85vw;
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+/* Style the head element differently than the body of the table. */
+table > thead {
+  background-color: crimson;
+  color: white;
+  padding: 7px 0;
+  padding-left: 10px;
+}
+
+/* Add a bit of breathing space between adjacent rows. */
+table > tbody > tr > td {
+  padding: 5px 0;
+  padding-left: 10px;
+}
+
+/* Manage the layout of the right-most column. */
+table > tbody > tr > td.actionCell {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: 5px;
+  margin-right: 5px;
+}
+
+/* Font styling for the PlaceID and DivisionID columns. */
+table > tbody > tr > td.codeCell {
+  font-family: "Martian Mono", monospace;
+  font-size: 0.7em;
+}
+
+/* Font styling for the Username and Password columns. */
+table > tbody > tr > td.creds {
+  font-family: "Martian Mono", monospace;
+  font-size: 0.7em;
+}
+
+/* Display handglove over the buttons. */
+table > tbody > tr > td.actionCell > a > button {
+  cursor: pointer;
+}
+
+/* Align both head and body of table to 'left' */
+table {
+  text-align: left;
+}
+
+/* Styling for the 'even' rows in the table. */
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styling for the 'odd' rows in the table. */
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Change color when hovering over a row. */
+table tr:hover {
+  background-color: #ddd;
+}
+
+/* Styling for the `Edit` Button in the right-most Column. */
+.edit-btn {
+  background-color: aliceblue;
+  border: black solid 1px;
+  margin: 2px 0;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+
+/*
+Create a lightcoral background when hovering over the `Edit` Button.
+*/
+.edit-btn:hover {
+  background-color: lightcoral;
+}
+
+/* Positioning of the Background Image if a user is not logged in. */
+img.background {
+  min-height: 100%;
+  min-width: 100%;
+
+  width: 100%;
+  height: auto;
+
+  position: relative;
+  top: 0;
+  left: 0;
+}

@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Martian+Mono:wght@600&display=swap");
+
+/* The wrapper for the <table> element. */
+.table-container {
+  margin-top: 50px;
+}
+
+/*
+Styling for the table itself. 
+It's a wide table, therefore let it consume 97% of the screen width.
+*/
+.table-container > table {
+  margin: 0 auto;
+  width: 90%;
+  min-width: 97vw;
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+/* Style the head element differently than the body of the table. */
+table thead tr th {
+  background-color: crimson;
+  color: white;
+  padding: 7px 0;
+  padding-left: 10px;
+}
+
+/* Add a bit of breathing space between adjacent rows. */
+table > tbody > tr > td {
+  padding: 5px 0;
+  padding-left: 10px;
+}
+
+/* font styling for the EmployeeId column.
+It is a "Mono" type of font. */
+table > tbody > tr > td.codeCell {
+  font-family: "Martian Mono", monospace;
+  font-size: 0.7em;
+}
+
+/* Display handglove icon over the buttons. */
+table > tbody > tr > td.actionCell > a > button {
+  cursor: pointer;
+}
+
+/* Align both head and body of table text to 'left' */
+table {
+  text-align: left;
+}
+
+/* Styling for the 'even' rows in the table. */
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styling for the 'odd' rows in the table. */
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Change color when hovering over a row for better responsiveness. */
+table tr:hover {
+  background-color: #ddd;
+}
+
+/*
+The Edit buttons in the Right-Most Column in the Table.
+*/
+.edit-btn {
+  background-color: aliceblue;
+  border: black solid 1px;
+  margin: 2px 0;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+
+/* Create a `lightseagreen` background when hovering over the button. */
+.edit-btn:hover {
+  background-color: lightseagreen;
+}

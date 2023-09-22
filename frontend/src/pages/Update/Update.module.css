@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Martian+Mono:wght@600&display=swap");
+
+/*
+The wrapper of the form element.
+Entails positioning of the form.
+Width is 28% of the screen width.
+Background gradient for aesthetic effects.
+*/
+.form-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 28vw;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 30%,
+    rgba(240, 128, 128, 1) 75%,
+    rgb(65, 105, 225, 1) 100%
+  );
+  border: 2px black solid;
+  border-radius: 20px;
+}
+
+/* 
+We want a 'vertical' form in the column direction.
+The Input Fields are below each other.
+*/
+form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 10px 20px;
+}
+
+/* Creating breating space between the inputs. */
+input {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/*
+Directives for the form input fields.
+Add breathing space below the <label>s.
+*/
+label {
+  margin-bottom: 5px;
+  font-weight: bolder;
+  color: black;
+}
+
+/*The `Update` button at the bottom of the form.*/
+.submit-btn {
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.25em;
+  font-weight: bolder;
+  border: 1px solid black;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: aliceblue;
+}
+
+/*
+Create crimson background when hovering over the button.
+*/
+.submit-btn:hover {
+  background-color: crimson;
+}
+
+/* Create a different font and background for the fields that CAN be edited. */
+.editable {
+  font-family: "Martian Mono", monospace;
+  font-size: 0.7em;
+  background-color: rgba(240, 128, 128, 0.3);
+}
+
+/*
+Force the user not to interact with uneditable fields.
+*/
+.uneditable {
+  pointer-events: none;
+}

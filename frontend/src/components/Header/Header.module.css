@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+/* Global styling for the header*/
+div.header {
+  font-family: "Josefin Sans", sans-serif;
+  padding: 0rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid 1px #000;
+  background: linear-gradient(90deg, bisque 0%, paleturquoise 50%, bisque 100%);
+}
+
+/* Paragraph elements inside div.header */
+div.header > p {
+  font-weight: bolder;
+  font-size: 1.4rem;
+}
+
+/* The Greeting in the middle of the Header. */
+div.middle {
+  font-weight: bolder;
+  font-size: 2.2rem;
+  margin-top: 1.1rem;
+  margin-left: -2rem;
+}
+
+div.middle > p {
+  padding: 0;
+  margin: 0;
+  vertical-align: center;
+}
+
+/* Let "Home", "Admin", "Log In", "Log Out" Display side by side. */
+div.header-right {
+  display: flex;
+}
+
+/* Anchor Elements.  They wrap the <p> elements containing the text. */
+div.header-right > a {
+  padding: 0 1.75rem;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+/* Styling for a visited tab. */
+div.header-right > a:visited {
+  color: black;
+}
+
+/* When hovering over an anchor. */
+div.header-right > a:not(.active):hover {
+  background-color: royalblue;
+  color: white;
+  border-bottom-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* The presentation of the active, selected tab. */
+div.header-right > a:has(.active) {
+  background: crimson;
+  color: white;
+  text-decoration-line: none;
+  border-bottom-left-radius: 12px;
+  border-top-right-radius: 12px;
+  font-weight: bolder;
+  transition: font-weight 300ms;
+}
