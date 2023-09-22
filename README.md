@@ -64,12 +64,11 @@ The Backend Port can be configured at the following places if needed:
 
 - Navigate to the **`backend`** folder.
   - Spin up a terminal and execute: **`npm install`**
-  - After successful installation, execute the following from the same terminal: **`npm run start`**
+  - After successful installation, execute the following from the same terminal: **`npm start`**
   - The database is "ready" if you see **> Mongo Connection Established.**
 - Navigate to the **`frontend`** folder.
-
   - Spin up another terminal and execute: **`npm install`**
-  - After successful installation, execute the following from the same terminal: **`npm run start`**
+  - After successful installation, execute the following from the same terminal: **`npm start`**
   - This will run the app which you can open at [http://localhost:3000](http://localhost:3000) in your favorite browser.
   - Read pages **4** and **5** of **`DB_Structure_L4T35.pdf`** if you wish to log in as an existing Employee.
 
