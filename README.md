@@ -1,5 +1,7 @@
 # CoolTech Credential Management System
 
+<img src="./example.png" width=450px />
+
 **Table of Contents**
 
 - [Author](#author)
@@ -57,6 +59,8 @@ The Backend Port can be configured at the following places if needed:
 
 - `/backend/.env/` -> **BACKEND_PORT**
 - `/frontend/package.json` -> **"proxy"**
+
+Currently, it is configured to be port **`8000`**.
 
 <a id="running"></a>
 
