@@ -35,7 +35,7 @@ This application is a Credential Management system, for the CoolTech Company, th
 
 ## Resources
 
-Please look at pages **4** and **5** of **`DB_Structure_L4T35.pdf`** to see the `Username` & `Password` (of existing Employees) in order to log into the app. These credentials cannot be inferred from querying MongoDB since it stores the **hashed** passwords (for security reasons).
+Please look at pages **4** and **5** of **`DB_Structure_L4T35.pdf`** to see the `Username` & `Password` (of existing Employees) in order to log into the app. Look at the right-most column to see what **role** the employee has. These credentials cannot be inferred from querying MongoDB since it stores the **hashed** passwords (for security reasons).
 Of course, an alternative would be to register as a new user and log in via that route, but that won't allow you to test all the functionality of the app.
 
 <a id="assumptions"></a>
