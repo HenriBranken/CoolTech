@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+import Loader from "../../components/Loader/Loader";
 import axios from "axios";
 
 import plus from "../../static/addIcon.png";
@@ -17,12 +18,15 @@ If you are logged in, Credential Data in a Table will be displayed.
 const Home = () => {
   const { loggedIn, role, getRole } = useContext(AuthContext);
   const [resourceData, setResourceData] = useState([]); // The Credential Data.
+  const [loading, setLoading] = useState(false);
 
   // Fetch data from the `Credentials` Collection, and filter by the user who is logged in.
   const getData = async () => {
+    setLoading(true);
     let response = await axios.get("/resources/getPlaces");
     let responseData = response.data;
     setResourceData(responseData);
+    setLoading(false);
   };
 
   // When the component mounts, execute `getData()` to populate the table with appropriate data.
@@ -41,7 +45,8 @@ const Home = () => {
           <img className={css["background"]} src={wallpaper} />
         </div>
       )}
-      {loggedIn === true && (
+      {loading && <Loader></Loader>}
+      {!loading && loggedIn === true && (
         <>
           {/* Navigate to the Add.js page when clicking on the Plus icon. */}
           <Link to={"/add"}>

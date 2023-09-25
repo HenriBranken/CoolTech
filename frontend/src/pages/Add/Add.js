@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 import css from "./Add.module.css";
 
 /*
@@ -22,6 +23,7 @@ const Add = () => {
   const [Username, setUsername] = useState(""); // New
   const [Password, setPassword] = useState(""); // New
   const [PasswordVerify, setPasswordVerify] = useState(""); // New
+  const [loading, setLoading] = useState(false);
 
   // Thi
   const [combos, setCombos] = useState({}); // Gets configured by `useEffect()`
@@ -29,8 +31,10 @@ const Add = () => {
   // Get the {divisionId: Unit > Division} Combos:
   const getCombos = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/data/getCombos");
       setCombos(response.data);
+      setLoading(false);
     } catch (error) {
       console.error({
         error: error,
@@ -87,77 +91,80 @@ const Add = () => {
   return (
     // Form to input the Unit, Division, Place, Username, Password, PasswordVerify.
     <div>
-      <div className={css["form-container"]}>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="divisionId">Division ID</label>
-          <select
-            name="divisionId"
-            id="divisionId"
-            onChange={(event) => setDivisionId(event.target.value)}
-          >
-            <option value="0">
-              &diams;&clubs; Select Division &clubs;&diams;
-            </option>
-            {/* Map all the possible Unit > Division Combos in the Company */}
-            {Object.keys(combos).map((key) => {
-              return (
-                <option key={key} value={key}>
-                  {combos[key]}
-                </option>
-              );
-            })}
-          </select>
-          <br />
-          <label htmlFor="place">Place</label>
-          <input
-            type="text"
-            id="place"
-            name="place"
-            placeholder="Enter Place"
-            onChange={(event) => {
-              setPlace(event.target.value);
-            }}
-            value={Place}
-          />
-          <label htmlFor="username">Username</label>
-          <input
-            className={css["editable"]}
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter Username"
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-            value={Username}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            className={css["editable"]}
-            type="text"
-            id="password"
-            name="password"
-            placeholder="Enter Password"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-            value={Password}
-          />
-          <label htmlFor="passwordVerify">Verify Password</label>
-          <input
-            className={css["editable"]}
-            type="text"
-            id="passwordVerify"
-            name="passwordVerify"
-            placeholder="Enter the Password Again"
-            onChange={(event) => {
-              setPasswordVerify(event.target.value);
-            }}
-            value={PasswordVerify}
-          />
-          <input className={css["submit-btn"]} type="submit" value="Add" />
-        </form>
-      </div>
+      {loading && <Loader></Loader>}
+      {!loading && (
+        <div className={css["form-container"]}>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="divisionId">Division ID</label>
+            <select
+              name="divisionId"
+              id="divisionId"
+              onChange={(event) => setDivisionId(event.target.value)}
+            >
+              <option value="0">
+                &diams;&clubs; Select Division &clubs;&diams;
+              </option>
+              {/* Map all the possible Unit > Division Combos in the Company */}
+              {Object.keys(combos).map((key) => {
+                return (
+                  <option key={key} value={key}>
+                    {combos[key]}
+                  </option>
+                );
+              })}
+            </select>
+            <br />
+            <label htmlFor="place">Place</label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              placeholder="Enter Place"
+              onChange={(event) => {
+                setPlace(event.target.value);
+              }}
+              value={Place}
+            />
+            <label htmlFor="username">Username</label>
+            <input
+              className={css["editable"]}
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter Username"
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
+              value={Username}
+            />
+            <label htmlFor="password">Password</label>
+            <input
+              className={css["editable"]}
+              type="text"
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+              value={Password}
+            />
+            <label htmlFor="passwordVerify">Verify Password</label>
+            <input
+              className={css["editable"]}
+              type="text"
+              id="passwordVerify"
+              name="passwordVerify"
+              placeholder="Enter the Password Again"
+              onChange={(event) => {
+                setPasswordVerify(event.target.value);
+              }}
+              value={PasswordVerify}
+            />
+            <input className={css["submit-btn"]} type="submit" value="Add" />
+          </form>
+        </div>
+      )}
     </div>
   );
 };

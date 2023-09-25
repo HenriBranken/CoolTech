@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
+import Loader from "../../components/Loader/Loader";
 
 import css from "./AdminPage.module.css";
 
@@ -10,6 +11,7 @@ import css from "./AdminPage.module.css";
 
 const AdminPage = () => {
   const [adminData, setAdminData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { getRole, role } = useContext(AuthContext);
 
   /*
@@ -18,9 +20,11 @@ const AdminPage = () => {
   In this sense, the Admin user can see all the employees belonging to his Divisions.
   */
   const getAdminData = async () => {
+    setLoading(true);
     let response = await axios.get("/resources/getAdminData");
     let responseData = response.data;
     setAdminData(responseData);
+    setLoading(false);
   };
 
   // When the component mounts, execute `getData()` to populate the table with appropriate data.
@@ -31,7 +35,8 @@ const AdminPage = () => {
 
   return (
     <div className={css["table-container"]}>
-      {role === "admin" && (
+      {loading && <Loader></Loader>}
+      {!loading && role === "admin" && (
         <table>
           <thead>
             <tr>

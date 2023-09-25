@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 
 import css from "./Update.module.css";
 
@@ -16,6 +17,7 @@ const Update = () => {
   const [Place, setPlace] = useState(""); // Just populated, not editable.
   const [Username, setUsername] = useState(""); // Is editable.
   const [Password, setPassword] = useState(""); // Is editable.
+  const [loading, setLoading] = useState(false);
 
   // Used to redirect the user to a different page.
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const Update = () => {
 
   // Based on the ID parameter, fetch data about the Place's Credential, and update some state.
   const getSingleCredential = async (credentialId) => {
+    setLoading(true);
     const response = await axios.get(`/cred/${credentialId}`);
     // Extract the data from the server response.
     const responseData = response.data;
@@ -35,6 +38,7 @@ const Update = () => {
     setPlace(responseData.Place);
     setUsername(responseData.Username);
     setPassword(responseData.Password);
+    setLoading(false);
   };
 
   // When the page opens, execute `getSingleCredential(credentialId)`;
@@ -84,63 +88,66 @@ const Update = () => {
   // <form> element used to captured the new data.
   return (
     <div>
-      <form className={css["form-container"]} onSubmit={handleSubmit}>
-        <label htmlFor="Unit">Unit</label>
-        {/* `Unit` field cannot be edited. */}
-        <input
-          className={css["uneditable"]}
-          type="text"
-          id="unit"
-          name="unit"
-          value={Unit}
-          readOnly
-        />
-        <label htmlFor="Division">Division</label>
-        {/* The Division Field cannot be Edited. */}
-        <input
-          className={css["uneditable"]}
-          type="text"
-          id="division"
-          name="division"
-          value={Unit_Division}
-          readOnly
-        />
-        <label htmlFor="Place">Place</label>
-        {/* Place cannot be edited. */}
-        <input
-          className={css["uneditable"]}
-          type="text"
-          id="place"
-          name="place"
-          value={Place}
-          readOnly
-        />
-        <label htmlFor="username">Username</label>
-        {/* Username IS editable */}
-        <input
-          className={css["editable"]}
-          type="text"
-          id="username"
-          name="username"
-          value={Username}
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <label htmlFor="password">Password</label>
-        {/* Password IS editable. */}
-        <input
-          className={css["editable"]}
-          type="text"
-          id="password"
-          name="password"
-          value={Password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <input className={css["submit-btn"]} type="submit" value={"Update"} />
-      </form>
+      {loading && <Loader></Loader>}
+      {!loading && (
+        <form className={css["form-container"]} onSubmit={handleSubmit}>
+          <label htmlFor="Unit">Unit</label>
+          {/* `Unit` field cannot be edited. */}
+          <input
+            className={css["uneditable"]}
+            type="text"
+            id="unit"
+            name="unit"
+            value={Unit}
+            readOnly
+          />
+          <label htmlFor="Division">Division</label>
+          {/* The Division Field cannot be Edited. */}
+          <input
+            className={css["uneditable"]}
+            type="text"
+            id="division"
+            name="division"
+            value={Unit_Division}
+            readOnly
+          />
+          <label htmlFor="Place">Place</label>
+          {/* Place cannot be edited. */}
+          <input
+            className={css["uneditable"]}
+            type="text"
+            id="place"
+            name="place"
+            value={Place}
+            readOnly
+          />
+          <label htmlFor="username">Username</label>
+          {/* Username IS editable */}
+          <input
+            className={css["editable"]}
+            type="text"
+            id="username"
+            name="username"
+            value={Username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+          <label htmlFor="password">Password</label>
+          {/* Password IS editable. */}
+          <input
+            className={css["editable"]}
+            type="text"
+            id="password"
+            name="password"
+            value={Password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+          <input className={css["submit-btn"]} type="submit" value={"Update"} />
+        </form>
+      )}
     </div>
   );
 };

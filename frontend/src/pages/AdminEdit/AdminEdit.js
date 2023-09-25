@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 
 import css from "./AdminEdit.module.css";
 
@@ -16,6 +17,7 @@ const AdminEdit = () => {
   const [theAdminsDivisionIds, setTheAdminsDivisionIds] = useState([]); // Pertaining to the Admin.
   const [Role, setRole] = useState(""); // The role of the Employee.
   const [corpDivisionList, setCorpDivisionList] = useState([]); // All divisions possible in CoolTech.
+  const [loading, setLoading] = useState(false);
 
   // Used to redirect the user to a different page.
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const AdminEdit = () => {
 
   // Based on the `employeeId` parameter, fetch data about the employee, and update the some state.
   const getEmployee = async (employeeId) => {
+    setLoading(true);
     const response = await axios.get(`/employee/employeeDetails/${employeeId}`);
     const responseData = response.data;
     setUsername(responseData.Username); // [1]
@@ -35,15 +38,19 @@ const AdminEdit = () => {
       list.push(divId.toString());
     });
     setDivision_IDs(list); // [3]
+    setLoading(false);
   };
 
   const getCorpDivisions = async () => {
+    setLoading(true);
     const response = await axios.get("/data/divisionData");
     const responseData = response.data;
     setCorpDivisionList(responseData);
+    setLoading(false);
   };
 
   const getTheAdminsDivisionIds = async () => {
+    setLoading(true);
     const response = await axios.get(`/employee/adminDetails`);
     const responseData = response.data;
 
@@ -52,6 +59,7 @@ const AdminEdit = () => {
       adminList.push(divId.toString());
     });
     setTheAdminsDivisionIds(adminList); // [3]
+    setLoading(false);
   };
 
   // When the page mounts:
@@ -122,83 +130,87 @@ const AdminEdit = () => {
   // The Form Components.
   return (
     <>
-      <div className={css["form-container"]}>
-        <form onSubmit={handleFormSubmit}>
-          {/* Describe the Username inside the <h3> */}
-          <h3>
-            Configure Divisions for <u>{Username}</u>:
-          </h3>
-          {/* Map out ALL possible divisions in CoolTech. */}
-          {corpDivisionList.map((elem) => {
-            return (
-              <div className={css["checkbox"]} key={elem.divisionId}>
+      {loading && <Loader></Loader>}
+      {!loading && (
+        <div className={css["form-container"]}>
+          <form onSubmit={handleFormSubmit}>
+            {/* Describe the Username inside the <h3> */}
+            <h3>
+              Configure Divisions for <u>{Username}</u>:
+            </h3>
+            {/* Map out ALL possible divisions in CoolTech. */}
+            {loading && <Loader></Loader>}
+            {corpDivisionList.map((elem) => {
+              return (
+                <div className={css["checkbox"]} key={elem.divisionId}>
+                  <input
+                    type="checkbox"
+                    name="divisions"
+                    value={elem.divisionId}
+                    // Default check the Intial Divisions of the Employee
+                    defaultChecked={Division_IDs.includes(elem.divisionId)}
+                    onChange={handleTick}
+                  />
+                  <label
+                    // Highlight the Division Label IF it is part of the Admin's Divisions
+                    className={
+                      theAdminsDivisionIds.includes(elem.divisionId)
+                        ? css["inclusive"]
+                        : ""
+                    }
+                  >
+                    &nbsp;&nbsp;{elem.division}
+                  </label>
+                </div>
+              );
+            })}
+            {/* Decide between `normal`, `management`, `admin`. */}
+            <h3>Configure User Role:</h3>
+            <div className={css["radio-btn"]}>
+              <label>
                 <input
-                  type="checkbox"
-                  name="divisions"
-                  value={elem.divisionId}
-                  // Default check the Intial Divisions of the Employee
-                  defaultChecked={Division_IDs.includes(elem.divisionId)}
-                  onChange={handleTick}
+                  type="radio"
+                  name="role"
+                  id="role"
+                  value="normal"
+                  checked={Role === "normal"}
+                  onChange={(e) => setRole(e.target.value)}
                 />
-                <label
-                  // Highlight the Division Label IF it is part of the Admin's Divisions
-                  className={
-                    theAdminsDivisionIds.includes(elem.divisionId)
-                      ? css["inclusive"]
-                      : ""
-                  }
-                >
-                  &nbsp;&nbsp;{elem.division}
-                </label>
-              </div>
-            );
-          })}
-          {/* Decide between `normal`, `management`, `admin`. */}
-          <h3>Configure User Role:</h3>
-          <div className={css["radio-btn"]}>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                id="role"
-                value="normal"
-                checked={Role === "normal"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              &nbsp;&nbsp;Normal
-            </label>
-          </div>
-          <div className={css["radio-btn"]}>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                id="role"
-                value="management"
-                checked={Role === "management"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              &nbsp;&nbsp;Management
-            </label>
-          </div>
-          <div className={css["radio-btn"]}>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                id="role"
-                value="admin"
-                checked={Role === "admin"}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              &nbsp;&nbsp;Admin
-            </label>
-          </div>
-          <button className={css["submit-btn"]} type="submit">
-            Save
-          </button>
-        </form>
-      </div>
+                &nbsp;&nbsp;Normal
+              </label>
+            </div>
+            <div className={css["radio-btn"]}>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  id="role"
+                  value="management"
+                  checked={Role === "management"}
+                  onChange={(e) => setRole(e.target.value)}
+                />
+                &nbsp;&nbsp;Management
+              </label>
+            </div>
+            <div className={css["radio-btn"]}>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  id="role"
+                  value="admin"
+                  checked={Role === "admin"}
+                  onChange={(e) => setRole(e.target.value)}
+                />
+                &nbsp;&nbsp;Admin
+              </label>
+            </div>
+            <button className={css["submit-btn"]} type="submit">
+              Save
+            </button>
+          </form>
+        </div>
+      )}
     </>
   );
 };
