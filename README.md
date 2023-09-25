@@ -5,6 +5,7 @@
 **Table of Contents**
 
 - [Author](#author)
+- [Background](#background)
 - [Introduction](#introduction)
 - [Resources](#resources)
 - [Assumptions & Notes](#assumptions)
@@ -20,6 +21,12 @@
 ## Author
 
 <a href="https://github.com/HenriBranken" target="_blank">Henri Branken</a>
+
+<a id="background"></a>
+
+## Background
+
+A core feature of this app is bringing all four components of the MERN stack in all their glory to create a fullstack app that has airtight authentication and authorization.
 
 <a id="introduction"></a>
 
